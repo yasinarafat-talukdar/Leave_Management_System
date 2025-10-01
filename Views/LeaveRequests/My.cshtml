@@ -1,0 +1,32 @@
+﻿@model IEnumerable<LeaveManagement.Models.LeaveRequest>
+@{
+    ViewData["Title"] = "My Leave Requests";
+}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>My Requests</h2>
+    <a class="btn btn-primary" asp-action="Create">New Request</a>
+</div>
+<table class="table table-striped">
+    <thead><tr><th>Type</th><th>Start</th><th>End</th><th>Days</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.LeaveType?.Name</td>
+                <td>@r.StartDate.ToString("yyyy-MM-dd")</td>
+                <td>@r.EndDate.ToString("yyyy-MM-dd")</td>
+                <td>@r.DaysRequested</td>
+                <td>@r.Status</td>
+                <td>
+                    <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@r.Id">Details</a>
+                    @if (r.Status == LeaveManagement.Models.LeaveStatus.Pending || r.Status == LeaveManagement.Models.LeaveStatus.Approved)
+                    {
+                        <form asp-action="Cancel" asp-route-id="@r.Id" method="post" class="d-inline">
+                            <button class="btn btn-sm btn-outline-danger">Cancel</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

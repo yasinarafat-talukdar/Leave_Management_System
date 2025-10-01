@@ -1,0 +1,11 @@
+﻿@model LeaveManagement.Models.LeaveType
+@{
+    ViewData["Title"] = "Delete Leave Type";
+}
+<h2>Delete Leave Type</h2>
+<div class="alert alert-warning">Are you sure you want to delete <strong>@Model.Name</strong>?</div>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button class="btn btn-danger">Delete</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+</form>

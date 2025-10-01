@@ -1,0 +1,36 @@
+﻿@model IEnumerable<LeaveManagement.Models.ApplicationUser>
+@{
+    ViewData["Title"] = "Users & Roles";
+}
+<h2>Users & Roles</h2>
+<table class="table table-striped">
+    <thead><tr><th>Email</th><th>Actions</th></tr></thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.Email</td>
+                <td>
+                    <form method="post" asp-action="AddToRole" class="d-inline">
+                        <input type="hidden" name="userId" value="@u.Id" />
+                        <select name="role" class="form-select d-inline w-auto">
+                            <option>Employee</option>
+                            <option>Manager</option>
+                            <option>Admin</option>
+                        </select>
+                        <button class="btn btn-sm btn-outline-primary ms-1">Add</button>
+                    </form>
+                    <form method="post" asp-action="RemoveFromRole" class="d-inline ms-1">
+                        <input type="hidden" name="userId" value="@u.Id" />
+                        <select name="role" class="form-select d-inline w-auto">
+                            <option>Employee</option>
+                            <option>Manager</option>
+                            <option>Admin</option>
+                        </select>
+                        <button class="btn btn-sm btn-outline-danger ms-1">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
